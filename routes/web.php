@@ -13,11 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
+//Auth::routes();
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Guest route
+Route::get('/', 'HomeController@index')->name('home');
+
+// Admin routes
+Route::middleware(['auth'])->group(function () {
+    Route::resource('users', 'UserController')->only([
+        'index', 'update'
+    ]);
+    Route::resource('experiences', 'ExperienceController')->only([
+        'index', 'store', 'update', 'destroy'
+    ]);
+    Route::resource('abilities', 'AbilityController')->only([
+        'index', 'store', 'update', 'destroy'
+    ]);
+    Route::resource('projects', 'ProjectController')->only([
+        'index', 'store', 'update', 'destroy'
+    ]);
+});
