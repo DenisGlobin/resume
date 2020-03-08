@@ -70,7 +70,20 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->update($request->all());
+        //$user->update($request->all());
+        $user->name = $request->name;
+        $user->skype = $request->skype;
+        $user->age = $request->age;
+        $user->location = $request->location;
+        $user->about = $request->about;
+        // If user want to delete his photo
+        if ($request->resetPhoto) {
+            $user->avatar = '';
+        } elseif ($request->hasFile('avatar')) {
+            //Call uploadFile method if the request have upload file
+            $user->avatar = $this->uploadFile($request);
+        }
+        $user->save();
         return redirect()->route('users.index');
     }
 
@@ -83,5 +96,21 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    /**
+     * Uploading file on the server
+     *
+     * @param Request $request
+     * @return string
+     */
+    private function uploadFile(Request $request)
+    {
+        $file = $request->file('avatar');
+        $fileName = $file->hashName();
+        $path = $file->storeAs(
+            'public/images/avatar', $fileName
+        );
+        return asset('storage/images/avatar/' . $fileName);
     }
 }

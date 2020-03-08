@@ -1,23 +1,415 @@
-@extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-script-type" content="text/javascript" />
+    <meta http-equiv="content-style-type" content="text/css" />
+    <meta http-equiv="content-language" content="nl" />
 
-                    You are logged in!
-                </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="author" content="Denis Globin" />
+    <meta name="description" content="I'm Denis Globin, a webdeveloper." />
+    <meta name="keywords" content="Denis Globin, Interactive Resume, PHP programmer, Web developer, Interactive CV, Laravel, PHP, MySQL, PostgreSQL, OOP" />
+    <meta name="robots" content="index, follow" />
+
+    <title>Denis Globin - Web Developer - Interactive Resume</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600,700" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+
+    <!-- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" /> -->
+
+    <!--[if lt IE 9]>
+    <script src="/view/js/html5shiv.js"></script>
+    <script src="/view/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body data-spy="scroll" data-target="#navbar-example">
+
+
+<div id="top" class="jumbotron parallax-mountain-1" data-position="center center">
+    <div class="container">
+        <h1>{{ $user->name }}</h1>
+        <p class="lead">Interactive resume</p>
+    </div>
+
+    <div class="overlay">
+        <div class="parallax">
+            <div class="parallax-mountain parallax-mountain-2"></div>
+            <div class="parallax-mountain parallax-mountain-3"></div>
+            <div class="parallax-fog"></div>
+        </div>
+    </div>
+
+    <a href="#profile" class="scroll-down">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+    </a>
+</div>
+
+<nav class="navbar navbar-default" id="navbar-example" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#profile">Profile</a></li>
+            <li><a href="#experiences">Experiences</a></li>
+            <li><a href="#abilities">Abilities</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+<div class="background-white">
+    <div id="profile" class="container">
+        <h2>Profile</h2>
+        <p class="lead">I&#039;m a creative PHP/Laravel webdeveloper</p>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-md-4">
+                <h3>About me</h3>
+                <p>
+                    {{ $user->about }}
+                </p>
+            </div>
+            <div class="col-md-4 text-center">
+                @if($user->avatar)
+                    <img class="img-thumbnail" width="246" height="246" src="{{ $user->avatar }}" alt="{{ $user->name }}">
+                @else
+                    <img class="img-thumbnail" width="246" height="246" src="images/avatar/default_avatar.jpg">
+                @endif
+            </div>
+            <div class="col-md-4">
+                <h3>Details</h3>
+                <p>
+                    <strong>Name:</strong><br />
+                    {{ $user->name }}<br />
+                    <strong>Age:</strong><br />
+                    {{ $user->age }} years<br />
+                    <strong>Location:</strong><br />
+                    {{ $user->location }}
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="experiences" class="container">
+    <h2>Experiences</h2>
+    <p class="lead">
+        &ldquo;Protons give an atom its identity, electrons its personality.&rdquo;<br />- Bill Bryson, A short history of nearly everything
+    </p>
+    <hr />
+
+    <h3>Educations</h3>
+
+    <div class="experiences">
+
+        <div class="experience row">
+            <div class="col-md-4">
+                <h4>Pridneprovs’ka State Academy of Civil Engineering and Architecture</h4>
+                <p class="experience-period">
+                    2012				-
+                    2015
+                </p>
+            </div>
+            <div class="col-md-8">
+                <p>
+                    <strong>Specialty "industrial civil engineering". Bachelor degree.</strong>
+                    <span class="hidden-phone">
+								Activity on the creation of architectural objects, which includes the creative process of finding an architectural solution and its implementation, coordination of participants’ actions in the development of all planning components, construction and improvement of territories, construction (new construction, reconstruction, restoration, overhaul) of buildings and structures.				
+							</span>
+                    <span class="experience-details">
+                        <span class="location">
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                            Dnepr
+                        </span>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <hr />
+
+    <h3>Careers</h3>
+
+    <div class="experiences">
+
+        <div class="experience row">
+            <div class="col-md-4">
+                <h4>Architectural organization</h4>
+                <p class="experience-period">
+                    Sep 2010	-
+                    current
+                </p>
+            </div>
+            <div class="col-md-8">
+                <p>
+                    <strong>Fulltime - Architect</strong>
+                    <span class="hidden-phone">
+                        I was engaged in design of buildings. Building design in the ArchiCAD software. Structural design and engineering in the Lira software.
+                    </span>
+                    <span class="experience-details">
+                        <span class="location">
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                            Berdyansk
+                        </span>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="background-white">
+    <div id="abilities" class="container">
+        <h2>Abilities</h2>
+        <p class="lead">
+            &ldquo;Life without knowledge is death in disguise.&rdquo;<br />- Talib Kweli
+        </p>
+        <hr />
+
+        <h3>Skills</h3>
+
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <ul class="no-bullets">
+
+                    <li>
+                        <span class="ability-title">Laravel Framework</span>
+                        <span class="ability-score">
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star "></span>
+                            <span class="glyphicon glyphicon-star "></span>
+				        </span>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="no-bullets">
+
+                    <li>
+                        <span class="ability-title">Object Orientated Programming</span>
+                        <span class="ability-score">
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star "></span>
+                            <span class="glyphicon glyphicon-star "></span>
+				        </span>
+                    </li>
+
+                </ul>
+            </div>
+
+
+        </div>
+
+        <div class="text-center project-referal">
+            <p>This project is build on a custom made PHP framework.</p>
+            <a href="https://github.com/pascalvgemert/resume" class="btn btn-primary" target="_blank">See project on Github</a>
+        </div>
+        <hr />
+
+        <h3>Languages</h3>
+
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <ul class="no-bullets">
+
+                    <li>
+                        <span class="ability-title">Russian (Native)</span>
+                        <span class="ability-score">
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+				        </span>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="no-bullets">
+
+                    <li>
+                        <span class="ability-title">English (Pre-Intermediate)</span>
+                        <span class="ability-score">
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star "></span>
+                            <span class="glyphicon glyphicon-star "></span>
+                            <span class="glyphicon glyphicon-star "></span>
+				        </span>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+        <hr />
+
+        <h3>Tools</h3>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <ul class="no-bullets">
+
+                    <li>
+                        <span class="ability-title">Google Chrome (8 years)</span>
+                        <span class="ability-score">
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+				        </span>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="col-md-6">
+                <ul class="no-bullets">
+
+                    <li>
+                        <span class="ability-title">Git / Git Flow (1 year)</span>
+                        <span class="ability-score">
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star filled"></span>
+                            <span class="glyphicon glyphicon-star "></span>
+				        </span>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="projects" class="container">
+    <h2>Projects</h2>
+    <p class="lead">
+        &ldquo;You can do anything you set your mind to.&rdquo;<br />- Benjamin Franklin
+    </p>
+    <hr />
+
+
+    <div class="row">
+
+
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <figure class="effect">
+                <img src="images/project_mals.jpg" alt="Mals" />
+
+                <figcaption>
+                    <h3>Mals</h3>
+                    <p>Mals, a creative agency located in Rotterdam.</p>
+                    <p><strong>Tags:</strong> <br />Development, Wordpress, Bootstrap</p>
+                    <a href="http://studiomals.com" target="_blank">View more</a>
+                    <span class="icon">
+					<span class="glyphicon glyphicon-new-window"></span>
+				</span>
+                </figcaption>
+            </figure>
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="background-gray">
+    <div id="contact" class="container">
+        <h2>Contact</h2>
+        <p class="lead">
+            &ldquo;If I had asked people what they wanted, they would have said faster horses. &rdquo;<br />- Henry Ford
+        </p>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="no-bullets">
+                    <li>
+                        <a href="javascript:void(0);">
+                            <span class="icon icon-skype"></span>
+                            {{ $user->skype }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="no-bullets">
+                    <li>
+                        <a href="mailto:globin.denis@gmail.com">
+                            <span class="icon icon-email"></span>
+                            {{ $user->email }}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr />
+
+    </div>
+</div>
+
+<div class="modal fade" id="upgrade-dialog" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Your browser is out of date</h4>
+            </div>
+            <div class="modal-body">
+                <p>To get the best possible experience using our site we recommend that you upgrade to a modern web browser. To download a newer web browser click on the Upgrade button.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="http://browsehappy.com/" target="_blank" class="btn btn-primary">Upgrade</a>
             </div>
         </div>
     </div>
 </div>
-@endsection
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/parallax.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
