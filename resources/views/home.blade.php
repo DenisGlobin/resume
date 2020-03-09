@@ -124,29 +124,28 @@
 
     <div class="experiences">
 
-        <div class="experience row">
-            <div class="col-md-4">
-                <h4>Pridneprovs’ka State Academy of Civil Engineering and Architecture</h4>
-                <p class="experience-period">
-                    2012				-
-                    2015
-                </p>
-            </div>
-            <div class="col-md-8">
-                <p>
-                    <strong>Specialty "industrial civil engineering". Bachelor degree.</strong>
-                    <span class="hidden-phone">
-								Activity on the creation of architectural objects, which includes the creative process of finding an architectural solution and its implementation, coordination of participants’ actions in the development of all planning components, construction and improvement of territories, construction (new construction, reconstruction, restoration, overhaul) of buildings and structures.				
-							</span>
-                    <span class="experience-details">
-                        <span class="location">
-                            <span class="glyphicon glyphicon-map-marker"></span>
-                            Dnepr
+        @foreach($educations as $education)
+            <div class="experience row">
+                <div class="col-md-4">
+                    <h4>{{ $education->name }}</h4>
+                    <p class="experience-period">
+                        {{ $education->years }}
+                    </p>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        <strong>{{ $education->title }}</strong>
+                        <span class="hidden-phone">{{ $education->text }}</span>
+                        <span class="experience-details">
+                            <span class="location">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                {{ $education->location }}
+                            </span>
                         </span>
-                    </span>
-                </p>
+                    </p>
+                </div>
             </div>
-        </div>
+        @endforeach
 
     </div>
     <hr />
@@ -155,29 +154,28 @@
 
     <div class="experiences">
 
-        <div class="experience row">
-            <div class="col-md-4">
-                <h4>Architectural organization</h4>
-                <p class="experience-period">
-                    Sep 2010	-
-                    current
-                </p>
-            </div>
-            <div class="col-md-8">
-                <p>
-                    <strong>Fulltime - Architect</strong>
-                    <span class="hidden-phone">
-                        I was engaged in design of buildings. Building design in the ArchiCAD software. Structural design and engineering in the Lira software.
-                    </span>
-                    <span class="experience-details">
-                        <span class="location">
-                            <span class="glyphicon glyphicon-map-marker"></span>
-                            Berdyansk
+        @foreach($careers as $career)
+            <div class="experience row">
+                <div class="col-md-4">
+                    <h4>{{ $career->name }}</h4>
+                    <p class="experience-period">
+                        {{ $career->years }}
+                    </p>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        <strong>{{ $career->title }}</strong>
+                        <span class="hidden-phone">{{ $career->text }}</span>
+                        <span class="experience-details">
+                            <span class="location">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                {{ $career->location }}
+                            </span>
                         </span>
-                    </span>
-                </p>
+                    </p>
+                </div>
             </div>
-        </div>
+        @endforeach
 
     </div>
 

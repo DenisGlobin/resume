@@ -19,7 +19,9 @@ class HomeController extends Controller
     {
         $data = [
             'user' => User::first(),
-            'experiences' => Experience::all(),
+//            'experiences' => Experience::all(),
+            'educations' => Experience::where('type', 'education')->get(),
+            'careers' => Experience::where('type', 'career')->get(),
             'abilities' => Ability::all(),
             'projects' => Project::all(),
         ];

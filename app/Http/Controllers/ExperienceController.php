@@ -15,7 +15,7 @@ class ExperienceController extends Controller
     public function index()
     {
         $experiences = Experience::all();
-        return view('admin.experiences', ['exp' => $experiences]);
+        return view('admin.experiences', ['experiences' => $experiences]);
     }
 
     /**
