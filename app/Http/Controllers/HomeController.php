@@ -22,7 +22,10 @@ class HomeController extends Controller
 //            'experiences' => Experience::all(),
             'educations' => Experience::where('type', 'education')->get(),
             'careers' => Experience::where('type', 'career')->get(),
-            'abilities' => Ability::all(),
+//            'abilities' => Ability::all(),
+            'skills' => Ability::where('type', 'skill')->get(),
+            'languages' => Ability::where('type', 'language')->get(),
+            'tools' => Ability::where('type', 'tool')->get(),
             'projects' => Project::all(),
         ];
         return view('home', $data);

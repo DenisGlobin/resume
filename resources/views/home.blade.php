@@ -192,129 +192,144 @@
         <h3>Skills</h3>
 
         <div class="row">
-
-
             <div class="col-md-6">
                 <ul class="no-bullets">
-
-                    <li>
-                        <span class="ability-title">Laravel Framework</span>
-                        <span class="ability-score">
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star "></span>
-                            <span class="glyphicon glyphicon-star "></span>
-				        </span>
-                    </li>
-
+                    @php
+                        $index = 1;
+                    @endphp
+                    @foreach($skills as $skill)
+                        {{-- Split the skills for two columns --}}
+                        @if($index > ($skills->count()/2))
+                            </ul>
+                            </div>
+                            <div class="col-md-6">
+                            <ul class="no-bullets">
+                        @endif
+                        <li>
+                            <span class="ability-title">{{ $skill->name }}</span>
+                            <span class="ability-score">
+                                @php
+                                    $filled = 0;
+                                @endphp
+                                {{-- Draw filled stars --}}
+                                @while ($filled < $skill->level)
+                                    <span class="glyphicon glyphicon-star filled"></span>
+                                    @php
+                                        $filled++;
+                                    @endphp
+                                @endwhile
+                                {{-- Draw non filled stars --}}
+                                @while ($filled < 5)
+                                    <span class="glyphicon glyphicon-star "></span>
+                                    @php
+                                        $filled++;
+                                    @endphp
+                                @endwhile
+                            </span>
+                        </li>
+                        @php
+                            $index++;
+                        @endphp
+                    @endforeach
                 </ul>
             </div>
-            <div class="col-md-6">
-                <ul class="no-bullets">
-
-                    <li>
-                        <span class="ability-title">Object Orientated Programming</span>
-                        <span class="ability-score">
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star "></span>
-                            <span class="glyphicon glyphicon-star "></span>
-				        </span>
-                    </li>
-
-                </ul>
-            </div>
-
-
         </div>
 
-        <div class="text-center project-referal">
-            <p>This project is build on a custom made PHP framework.</p>
-            <a href="https://github.com/pascalvgemert/resume" class="btn btn-primary" target="_blank">See project on Github</a>
-        </div>
+        {{--<div class="text-center project-referal">--}}
+            {{--<p>This project is build on a custom made PHP framework.</p>--}}
+            {{--<a href="https://github.com/pascalvgemert/resume" class="btn btn-primary" target="_blank">See project on Github</a>--}}
+        {{--</div>--}}
         <hr />
 
         <h3>Languages</h3>
 
         <div class="row">
-
-
             <div class="col-md-6">
                 <ul class="no-bullets">
 
-                    <li>
-                        <span class="ability-title">Russian (Native)</span>
-                        <span class="ability-score">
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-				        </span>
-                    </li>
-
+                    @php
+                        $index = 1;
+                    @endphp
+                    @foreach($languages as $language)
+                        @if($index > ($languages->count()/2))
                 </ul>
             </div>
             <div class="col-md-6">
                 <ul class="no-bullets">
-
+                        @endif
                     <li>
-                        <span class="ability-title">English (Pre-Intermediate)</span>
+                        <span class="ability-title">{{ $language->name }}</span>
                         <span class="ability-score">
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star "></span>
-                            <span class="glyphicon glyphicon-star "></span>
-                            <span class="glyphicon glyphicon-star "></span>
-				        </span>
+                                @php
+                                    $filled = 0;
+                                @endphp
+                            @while ($filled < $language->level)
+                                <span class="glyphicon glyphicon-star filled"></span>
+                                @php
+                                    $filled++;
+                                @endphp
+                            @endwhile
+                            @while ($filled < 5)
+                                <span class="glyphicon glyphicon-star "></span>
+                                @php
+                                    $filled++;
+                                @endphp
+                            @endwhile
+                            </span>
                     </li>
+                    @php
+                        $index++;
+                    @endphp
+                    @endforeach
 
                 </ul>
             </div>
-
         </div>
         <hr />
 
         <h3>Tools</h3>
 
         <div class="row">
-
             <div class="col-md-6">
                 <ul class="no-bullets">
 
-                    <li>
-                        <span class="ability-title">Google Chrome (8 years)</span>
-                        <span class="ability-score">
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-				        </span>
-                    </li>
-
+                    @php
+                        $index = 1;
+                    @endphp
+                    @foreach($tools as $tool)
+                        @if($index > ($tools->count()/2))
                 </ul>
             </div>
-
             <div class="col-md-6">
                 <ul class="no-bullets">
-
+                        @endif
                     <li>
-                        <span class="ability-title">Git / Git Flow (1 year)</span>
+                        <span class="ability-title">{{ $tool->name }}</span>
                         <span class="ability-score">
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star filled"></span>
-                            <span class="glyphicon glyphicon-star "></span>
-				        </span>
+                                @php
+                                    $filled = 0;
+                                @endphp
+                            @while ($filled < $tool->level)
+                                <span class="glyphicon glyphicon-star filled"></span>
+                                @php
+                                    $filled++;
+                                @endphp
+                            @endwhile
+                            @while ($filled < 5)
+                                <span class="glyphicon glyphicon-star "></span>
+                                @php
+                                    $filled++;
+                                @endphp
+                            @endwhile
+                            </span>
                     </li>
+                    @php
+                        $index++;
+                    @endphp
+                    @endforeach
 
                 </ul>
             </div>
-
         </div>
     </div>
 </div>
