@@ -40,18 +40,16 @@ class ProjectController extends Controller
 
         $project->title = $request->title;
         $project->subtitle = $request->subtitle;
-
-//        $project->tags = '[';
-//        foreach ($request->tags as $tag) {
-//            $project->tags .= $tag . ', ';
-//        }
-//        $project->tags .= ']';
-
         $project->tags = json_encode($request->tags);
-        $project->site_url = $request->site_url;
-        $project->github_url = $request->github_url;
-        $project->thumbnail = $request->thumbnail;
-        $project->is_test_task = $request->is_test_task;
+        $project->site_url = $request->siteUrl;
+        $project->github_url = $request->githubUrl;
+        $project->is_test_task = isset($request->testTask) ? $request->testTask : false;
+        if ($request->hasFile('thumbnail')) {
+            //Call uploadFile method if the request have upload file
+            $project->thumbnail = $this->uploadFile($request);
+        } else {
+            $project->thumbnail = asset('images/projects/default_thumb.png');
+        }
 
         $project->save();
         return redirect()->route('projects.index');
@@ -91,10 +89,16 @@ class ProjectController extends Controller
         $project->title = $request->title;
         $project->subtitle = $request->subtitle;
         $project->tags = json_encode($request->tags);
-        $project->site_url = $request->site_url;
-        $project->github_url = $request->github_url;
-        $project->thumbnail = $request->thumbnail;
-        $project->is_test_task = $request->is_test_task;
+        $project->site_url = $request->siteUrl;
+        $project->github_url = $request->githubUrl;
+        $project->is_test_task = isset($request->testTask) ? $request->testTask : false;
+        // If user want to delete thumbnail of this project
+        if ($request->resetThumb) {
+            $project->thumbnail = asset('images/projects/default_thumb.png');
+        } elseif ($request->hasFile('thumbnail')) {
+            //Call uploadFile method if the request have upload file
+            $project->thumbnail = $this->uploadFile($request);
+        }
 
         $project->save();
         return redirect()->route('projects.index');
@@ -110,5 +114,21 @@ class ProjectController extends Controller
     {
         $project->delete();
         return redirect()->route('projects.index');
+    }
+
+    /**
+     * Uploading file on the server
+     *
+     * @param Request $request
+     * @return string
+     */
+    private function uploadFile(Request $request)
+    {
+        $file = $request->file('thumbnail');
+        $fileName = $file->hashName();
+        $path = $file->storeAs(
+            'public/images/projects', $fileName
+        );
+        return asset('storage/images/projects/' . $fileName);
     }
 }

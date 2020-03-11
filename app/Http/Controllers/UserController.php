@@ -78,7 +78,7 @@ class UserController extends Controller
         $user->about = $request->about;
         // If user want to delete his photo
         if ($request->resetPhoto) {
-            $user->avatar = '';
+            $user->avatar = asset('images/avatar/default_avatar.jpg');
         } elseif ($request->hasFile('avatar')) {
             //Call uploadFile method if the request have upload file
             $user->avatar = $this->uploadFile($request);

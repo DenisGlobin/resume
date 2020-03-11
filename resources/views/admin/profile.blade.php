@@ -25,12 +25,12 @@
                                 {{-- Name --}}
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control is-valid" id="name" name="name" value="{{ $user->name }}" required>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
                                 </div>
                                 {{-- Age --}}
                                 <div class="form-group">
                                     <label for="name">Age</label>
-                                    <input type="text" class="form-control is-valid" id="age" name="age" value="{{ $user->age }}" required>
+                                    <input type="text" class="form-control" id="age" name="age" value="{{ $user->age }}" required>
                                 </div>
                                 {{-- About --}}
                                 <div class="form-group">
@@ -40,7 +40,7 @@
                                 {{-- Location --}}
                                 <div class="form-group">
                                     <label for="location">Location</label>
-                                    <input type="text" class="form-control is-valid" id="location" name="location" value="{{ $user->location }}" required>
+                                    <input type="text" class="form-control" id="location" name="location" value="{{ $user->location }}" required>
                                 </div>
                                 {{-- Skype --}}
                                 <div class="form-group">

@@ -6,11 +6,11 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-script-type" content="text/javascript" />
     <meta http-equiv="content-style-type" content="text/css" />
-    <meta http-equiv="content-language" content="nl" />
+    <meta http-equiv="content-language" content="en" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="author" content="Denis Globin" />
+    <meta name="author" content="{{ $user->name }}" />
     <meta name="description" content="I'm Denis Globin, a webdeveloper." />
     <meta name="keywords" content="Denis Globin, Interactive Resume, PHP programmer, Web developer, Interactive CV, Laravel, PHP, MySQL, PostgreSQL, OOP" />
     <meta name="robots" content="index, follow" />
@@ -91,11 +91,7 @@
                 </p>
             </div>
             <div class="col-md-4 text-center">
-                @if($user->avatar)
-                    <img class="img-thumbnail" width="246" height="246" src="{{ $user->avatar }}" alt="{{ $user->name }}">
-                @else
-                    <img class="img-thumbnail" width="246" height="246" src="images/avatar/default_avatar.jpg">
-                @endif
+                <img class="img-thumbnail" width="246" height="246" src="{{ $user->avatar }}" alt="{{ $user->name }}">
             </div>
             <div class="col-md-4">
                 <h3>Details</h3>
@@ -334,7 +330,6 @@
     </div>
 </div>
 
-
 <div id="projects" class="container">
     <h2>Projects</h2>
     <p class="lead">
@@ -342,26 +337,33 @@
     </p>
     <hr />
 
-
     <div class="row">
 
+        @foreach($projects as $project)
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <figure class="effect">
+                    <img src="{{ $project->thumbnail }}" alt="{{ $project->title }}" />
 
-        <div class="col-md-6 col-sm-12 col-xs-12">
-            <figure class="effect">
-                <img src="images/project_mals.jpg" alt="Mals" />
-
-                <figcaption>
-                    <h3>Mals</h3>
-                    <p>Mals, a creative agency located in Rotterdam.</p>
-                    <p><strong>Tags:</strong> <br />Development, Wordpress, Bootstrap</p>
-                    <a href="http://studiomals.com" target="_blank">View more</a>
-                    <span class="icon">
-					<span class="glyphicon glyphicon-new-window"></span>
-				</span>
-                </figcaption>
-            </figure>
-        </div>
-
+                    <figcaption>
+                        <h3>{{ $project->title }}</h3>
+                        <p>{{ $project->subtitle }}</p>
+                        <p>
+                            <strong>Tags:</strong> <br />
+                            @foreach(json_decode($project->tags) as $tag)
+                                {{ $tag }},
+                            @endforeach
+                        </p>
+                        <a href="{{ $project->site_url }}" target="_blank">View more</a>
+                        <span class="icon">
+                        <span class="glyphicon glyphicon-new-window"></span>
+                        </span>
+                    </figcaption>
+                </figure>
+                <div class="text-center project-referal">
+                    <a href="{{ $project->github_url }}" class="btn btn-primary" target="_blank">See project on Github</a>
+                </div>
+            </div>
+        @endforeach
 
     </div>
 
@@ -392,7 +394,6 @@
                         <a href="mailto:globin.denis@gmail.com">
                             <span class="icon icon-email"></span>
                             {{ $user->email }}
-                            </span>
                         </a>
                     </li>
                 </ul>

@@ -21,7 +21,7 @@
                                 {{-- Name --}}
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control is-valid" id="name" name="name" value="{{ $ability->name }}" required>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ $ability->name }}" required>
                                 </div>
                                 {{-- Level --}}
                                 <div class="form-group">
@@ -66,7 +66,7 @@
                             {{-- Name --}}
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control is-valid" id="name" name="name" required>
+                                <input type="text" class="form-control" id="name" name="name" required>
                             </div>
                             {{-- Level --}}
                             <div class="form-group">
