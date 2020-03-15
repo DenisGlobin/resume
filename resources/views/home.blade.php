@@ -353,15 +353,19 @@
                                 {{ $tag }},
                             @endforeach
                         </p>
-                        <a href="{{ $project->site_url }}" target="_blank">View more</a>
-                        <span class="icon">
-                        <span class="glyphicon glyphicon-new-window"></span>
-                        </span>
+                        @if($project->site_url)
+                            <a href="{{ $project->site_url }}" target="_blank">View more</a>
+                            <span class="icon">
+                            <span class="glyphicon glyphicon-new-window"></span>
+                            </span>
+                        @endif
                     </figcaption>
                 </figure>
-                <div class="text-center project-referal">
-                    <a href="{{ $project->github_url }}" class="btn btn-primary" target="_blank">See project on Github</a>
-                </div>
+                @if($project->github_url)
+                    <div class="text-center project-referal">
+                        <a href="{{ $project->github_url }}" class="btn btn-primary" target="_blank">See project on Github</a>
+                    </div>
+                @endif
             </div>
         @endforeach
 

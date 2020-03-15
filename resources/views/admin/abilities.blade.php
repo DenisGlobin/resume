@@ -8,9 +8,17 @@
                     <div class="card-header"><h2>Edit abilities</h2></div>
 
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                        @if (session('errors'))
+                            <div class="alert alert-error" role="alert">
+                                <div class="alert alert-danger" role="alert">
+                                    <?php
+                                    $errors = session()->get('errors');
+                                    $messages = "";
+                                    ?>
+                                    @foreach($errors->all('<p>:message</p>') as $message)
+                                        {!! $message !!}
+                                    @endforeach
+                                </div>
                             </div>
                         @endif
                         {{-- List of a forms for edit abilities --}}

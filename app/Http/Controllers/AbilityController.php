@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ability;
+use App\Http\Requests\AbilityRequest;
 use Illuminate\Http\Request;
 
 class AbilityController extends Controller
@@ -16,16 +17,6 @@ class AbilityController extends Controller
     {
         $abilities = Ability::all();
         return view('admin.abilities', ['abilities' => $abilities]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -46,35 +37,13 @@ class AbilityController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Ability  $ability
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Ability $ability)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Ability  $ability
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ability $ability)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\AbilityRequest  $request
      * @param  \App\Ability  $ability
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ability $ability)
+    public function update(AbilityRequest $request, Ability $ability)
     {
         $ability->update($request->all());
         return redirect()->route('abilities.index');
@@ -88,7 +57,11 @@ class AbilityController extends Controller
      */
     public function destroy(Ability $ability)
     {
-        $ability->delete();
-        return redirect()->route('abilities.index');
+        try {
+            $ability->delete();
+            return redirect()->route('abilities.index');
+        } catch (\Exception $exception) {
+            return redirect()->route('abilities.index')->with('errors', $exception->getMessage());
+        }
     }
 }

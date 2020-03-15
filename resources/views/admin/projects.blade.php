@@ -8,9 +8,17 @@
                     <div class="card-header"><h2>Edit projects</h2></div>
 
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                        @if (session('errors'))
+                            <div class="alert alert-error" role="alert">
+                                <div class="alert alert-danger" role="alert">
+                                    <?php
+                                    $errors = session()->get('errors');
+                                    $messages = "";
+                                    ?>
+                                    @foreach($errors->all('<p>:message</p>') as $message)
+                                        {!! $message !!}
+                                    @endforeach
+                                </div>
                             </div>
                         @endif
 
@@ -78,7 +86,15 @@
 
                                 <button class="btn btn-primary" type="submit">Update</button>
                             </form>
-                            <br><hr />
+
+                                <br>
+                                {{-- Delete project --}}
+                                <form method="POST" action="{{ route('projects.destroy', ['project' => $project]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                                <br><hr />
                         @endforeach
 
                     </div>
@@ -165,13 +181,15 @@
         // Add Tag
         $(function () {
             $("button.btn-outline-secondary").on('click', function () {
-                let tag = $("input#tags").val();
+                // let tag = $("input#tags").val();
+                let tag = $(this).prev("#tags").val();
+                // console.log(tag);
                 if (!!tag) {
-                    $("label#tagsLabel").after("" +
+                    $(this).siblings("#tagsLabel").after("" +
                         "<button type='button' class='btn btn-light btn-sm fade show' onclick='deleteTag(event)' value='" + tag + "'>" +
                         tag + "<span class='badge badge-secondary' aria-hidden='true'>&times;</span>\n" +
                         "</button>\n");
-                    $("input#tags").val('');
+                    $(this).prev("#tags").val('');
                 }
             })
         });
@@ -181,17 +199,19 @@
             domElement.remove();
         }
         // Add tags to post's data
-        // formProject.onsubmit = (e) => {
         $('body').on('submit', '.formProject', function(e) {
-            let form = $(this);
+            // e.preventDefault();
+            let myForm = $(this);
             // Delete add tags field
             let data = new FormData(e.target);
             data.delete('tags');
             // Add tags to form
-            $.each($("button.fade"), function () {
-                $(form).append('<input type="hidden" name="tags[]" value="'+$(this).val()+'">');
+            let tagsButtons = $(this).children().siblings("div.form-group").children("button.fade");
+             // console.log(tagsButtons);
+            $(tagsButtons).each(function () {
+                // console.log($(this));
+                $(myForm).append('<input type="hidden" name="tags[]" value="'+$(this).val()+'">');
             });
-        // }
         });
     </script>
 @endsection

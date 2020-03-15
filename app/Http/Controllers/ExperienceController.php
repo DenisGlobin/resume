@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Experience;
+use App\Http\Requests\ExperienceRequest;
 use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
@@ -19,22 +20,12 @@ class ExperienceController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ExperienceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ExperienceRequest $request)
     {
         $experience = new Experience;
 
@@ -50,35 +41,13 @@ class ExperienceController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Experience  $experience
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Experience $experience)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Experience  $experience
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Experience $experience)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ExperienceRequest  $request
      * @param  \App\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Experience $experience)
+    public function update(ExperienceRequest $request, Experience $experience)
     {
         $experience->update($request->all());
         return redirect()->route('experiences.index');
@@ -92,7 +61,11 @@ class ExperienceController extends Controller
      */
     public function destroy(Experience $experience)
     {
-        $experience->delete();
-        return redirect()->route('experiences.index');
+        try {
+            $experience->delete();
+            return redirect()->route('experiences.index');
+        } catch (\Exception $exception) {
+            return redirect()->route('experiences.index')->with('errors', $exception->getMessage());
+        }
     }
 }
