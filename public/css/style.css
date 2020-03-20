@@ -26,7 +26,6 @@ hr { margin: 40px 0px; border-color: #727878; opacity: 0.2; filter:alpha(opacity
 .icon.icon-email { background-position: 0px -96px; }
 
 .jumbotron {
-	/*background: no-repeat center right fixed url(../images/m_1.png);*/
 
 	-webkit-background-size: 100%; 
     -moz-background-size: 100%; 
@@ -38,55 +37,49 @@ hr { margin: 40px 0px; border-color: #727878; opacity: 0.2; filter:alpha(opacity
 	-o-background-size: cover;
 	background-size: cover;
 	
-	/*-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/m_1.png', sizingMethod='scale')";*/
-	/*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/m_1.png', sizingMethod='scale');*/
-	
 	margin-bottom: 0px;
 	padding: 0px;
-
-	/*new option*/
-	/*z-index: 0;*/
-
 }
 
 .parallax {
 	position: relative;
 	height: 100%;
-}  
+}
 .parallax-mountain {
-	position: absolute;
-	max-width: 105%;
-	width: 105%;
+	position: fixed;
+	max-width: 110%;
+	width: 110%;
 	height: 100%;
 	top: 0;
-	left: -5%;
+	left: -10%;
 }
 .parallax-mountain-1 {
 	background: url('../images/m_1.png') 0 0 / cover no-repeat;
-	/*position: fixed;*/
 	z-index: 0;
 }
 .parallax-mountain-2 {
 	z-index: 1;
-	background-size: cover;
-	background: url('../images/m_2.png') bottom right / 45% 60% no-repeat;
+	background: url('../images/m_2.png')  bottom right / 45% no-repeat;
 }
 .parallax-mountain-3 {
 	z-index: 1;
-	background: url('../images/m_3.png') bottom left / 100% 60% no-repeat;
+	background: url('../images/m_3.png') bottom left / 100% no-repeat;
 }
 .parallax-fog {
-	z-index: 2;
 	background: url('../images/fog_1.png') bottom / 100% no-repeat;
 	position: fixed;
 	height: 100%;
-	width: 105%;
+	width: 110%;
 	top: 0;
-	left: -5%;
-	opacity: 1;
+	left: -10%;
+	z-index: 2;
 }
 
-.jumbotron .overlay { /*background-color: #22A39F;*/ position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; /*opacity: 0.75;*/ /*filter:alpha(opacity=75);*/ /*z-index: 2;*/ }
+.content {
+	position: relative;
+	z-index: 3;
+	background: #FFFFFF;
+}
 
 .jumbotron .container { position: relative; top: 28%; z-index: 4; text-align: center; }
 .jumbotron .container > * { text-align: center; color: #444444; }
@@ -121,6 +114,7 @@ hr { margin: 40px 0px; border-color: #727878; opacity: 0.2; filter:alpha(opacity
 .fixed .navbar  { position: fixed; top: 60px; }
 
 .background-white { background: #FFFFFF; }
+.background-beige { background: #F3EFE0; }
 .background-gray { background: #434242; }
 .container { max-width: 1280px; padding: 40px 180px; }
 
@@ -215,21 +209,6 @@ hr { margin: 40px 0px; border-color: #727878; opacity: 0.2; filter:alpha(opacity
 #contact a { display: block; line-height: 32px; margin-bottom: 20px; opacity: 0.6; filter:alpha(opacity=60);  }
 #contact a .icon { float: left; margin-right: 20px; }
 #contact a:hover { opacity: 1; filter:alpha(opacity=100); text-decoration: none; }
-
-/*.opl {
-	position:absolute;
-	top:100px;
-	left:0px;
-	z-index:99999;
-}
-
-.opl a {
-	width:73px;
-	height:56px;
-	text-indent:-9999px;
-	display:block;
-	background:url('https://s3.amazonaws.com/onepagelove/one-page-love-award.png') no-repeat;
-}*/
 
 @media (max-width: 1200px) { 
 	#interests .interest-content { padding: 20px 0px; }
